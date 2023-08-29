@@ -12,4 +12,4 @@ async def on_ready():
 async def tb(ctx):
     await ctx.send("Go Fight TB, Seal!!!")
 
-client.run('MTE0NDc0NDYyMTczODU2OTg0OQ.GbLSvA.FL1X3tVnPTI1EhOriQdDHF_PRL-URWZui4gseo')
+client.run('enter-token-here')
