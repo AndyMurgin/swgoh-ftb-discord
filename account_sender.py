@@ -1,4 +1,5 @@
 import requests
+
 from urls import UrlMaker
 
 
@@ -36,4 +37,7 @@ class OwnerAccountSender:
         response = requests.post(
             UrlMaker.post_command_url(), json=payload, headers=headers
         )
-        print(response.text)
+        if not response.ok:
+            print(response.json())
+        else:
+            print("Command has been sent")
