@@ -22,7 +22,7 @@ class OwnerAccountSender:
             "application_id": 752366060312723546,
             "channel_id": 1144745341514698845,
             "guild_id": 1144745341514698842,
-            "session_id": "71910d296e31bf85e00502980d04a295",
+            "session_id": "",  # 71910d296e31bf85e00502980d04a295
             "data": {
                 "version": 1135049866154885207,
                 "id": 1135049865307635792,
