@@ -1,10 +1,14 @@
 import discord
 from discord import Message
 from discord.ext import commands
+from discord.ext.commands import Context
 
 from account_sender import OwnerAccountSender
+from c3po_validator import C3POValidator
 from configs import PropertiesHolder
+from environment import ENV
 from seals_finder import Hunter
+from seals_notifier import Notifier
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 ownerSender = OwnerAccountSender(PropertiesHolder.get_owner_token())
@@ -17,18 +21,8 @@ async def on_ready():
 
 
 @client.event
-async def on_message(message):
-    await client.process_commands(message)
-
-
-@client.event
 async def on_message_edit(before, after: Message):
-    if (
-        not after.author.id == 752366060312723546
-        or not after.interaction
-        or not after.interaction.name == "tb gp low"
-        or not len(after.embeds) == 1
-    ):
+    if not C3POValidator.is_valid_tb_gp_low(after):
         return
 
     seals = [x.name for x in after.embeds[0].fields]
@@ -38,23 +32,10 @@ async def on_message_edit(before, after: Message):
         grouped_members = Hunter.find_seal_members(seals, ctx)
         await ctx.send("WTF??? Быстро бить ТБ!")
         if len(grouped_members.found_members) > 0:
-            await ctx.send(
-                "\n".join(
-                    [
-                        member.mention
-                        for nickname, member in grouped_members.found_members.items()
-                    ]
-                )
-            )
+            await Notifier.notify_members(ctx, grouped_members.found_members)
 
         if len(grouped_members.unrecognized) > 0:
-            await ctx.send(
-                "Не смог найти некоторых тюленей в этом канале. Добавьте их вручную (пока не реализовано) "
-                "или идите за ними в Telegram:"
-            )
-            await ctx.send(
-                "\n".join([nickname for nickname in grouped_members.unrecognized])
-            )
+            await Notifier.send_just_nicknames(ctx, grouped_members.unrecognized)
 
     else:
         await ctx.send("Тюлени не обнаружены. Кажется, я попал не в Tython_LEPV.")
@@ -63,9 +44,12 @@ async def on_message_edit(before, after: Message):
 
 
 @client.command()
-async def tb(ctx):
-    await ctx.send("Capturing the creator's mind...")
-    ownerSender.command()
+async def notag(ctx: Context, value: bool):
+    channel_id = ctx.channel.id
+    ENV.update_notag_mode(channel_id, value)
+    await ctx.send(
+        f"Режим 'Без Тегов' {'активирован' if value else 'выключен'} для текущего канала!"
+    )
 
 
 client.run(PropertiesHolder.get_bot_token())

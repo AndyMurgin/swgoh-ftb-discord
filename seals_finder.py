@@ -8,7 +8,7 @@ class SealMembers:
 
 class Hunter:
     @staticmethod
-    def find_seal_members(seals: list, ctx: Context) -> SealMembers:
+    def find_seal_members(seals: list[str], ctx: Context) -> SealMembers:
         grouped_members = SealMembers()
         channel_members = ctx.channel.members
         grouped_members.found_members = {
