@@ -8,6 +8,7 @@ class PropertiesHolder:
     __BOT_TOKEN = "discord.bot.token"
     __OWNER_AUTH_TOKEN = "discord.owner.token"
     __DEFAULT_NO_TAG_MODE = "discord.default.no_tag_mode"
+    __DEFAULT_TRACK_TB = "discord.default.track_c3po_tb"
 
     @classmethod
     def get_bot_token(cls):
@@ -21,6 +22,11 @@ class PropertiesHolder:
     def get_default_notag_mode(cls) -> bool:
         notag_value = cls.get_property(cls.__DEFAULT_NO_TAG_MODE)
         return bool(notag_value) if notag_value is not None else True
+
+    @classmethod
+    def get_default_track_c3po_tb(cls) -> bool:
+        track_tb_value = cls.get_property(cls.__DEFAULT_TRACK_TB)
+        return bool(track_tb_value) if track_tb_value is not None else None
 
     @classmethod
     def get_property(cls, key):

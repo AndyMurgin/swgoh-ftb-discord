@@ -52,4 +52,13 @@ async def notag(ctx: Context, value: bool):
     )
 
 
+@client.command()
+async def track_c3po_tb(ctx: Context, value: bool):
+    channel_id = ctx.channel.id
+    ENV.update_track_c3po_tb(channel_id, value)
+    await ctx.send(
+        f"Режим 'Поддержка C3PO В Поиске Тюленей' {'активирован' if value else 'выключен'} для текущего канала!"
+    )
+
+
 client.run(PropertiesHolder.get_bot_token())
