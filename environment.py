@@ -1,4 +1,5 @@
 from configs import PropertiesHolder
+from mongo_settings_service import SettingsDbService
 
 
 class Environment:
@@ -13,8 +14,8 @@ class Environment:
             else PropertiesHolder.get_default_notag_mode()
         )
 
-    def update_notag_mode(self, channel_id: int, value: bool):
-        self.__settings.update({"notag": {channel_id: value}})
+    def update_notag_mode(self, channel_id: int, value: bool) -> bool:
+        return SettingsDbService.update_notag_setting(channel_id, value)
 
     def is_tracking_c3po_tb(self, channel_id: int):
         track_tb = self.__settings.get("track_c3po_tb")

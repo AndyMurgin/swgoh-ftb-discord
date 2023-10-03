@@ -46,10 +46,15 @@ async def on_message_edit(before, after: Message):
 @client.command()
 async def notag(ctx: Context, value: bool):
     channel_id = ctx.channel.id
-    ENV.update_notag_mode(channel_id, value)
-    await ctx.send(
-        f"Режим 'Без Тегов' {'активирован' if value else 'выключен'} для текущего канала!"
-    )
+    updated_setting = ENV.update_notag_mode(channel_id, value)
+    if updated_setting is None:
+        await ctx.send(
+            f"Ошибка при сохранении значения в БД! Обратитесь к создателю."
+        )
+    else:
+        await ctx.send(
+            f"Режим 'Без Тегов' {'активирован' if value else 'выключен'} для текущего канала!"
+        )
 
 
 @client.command()
