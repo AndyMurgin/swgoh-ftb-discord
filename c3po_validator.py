@@ -1,6 +1,6 @@
 from discord import Message
 
-from environment import ENV
+from environment import is_tracking_c3po_tb
 
 
 class C3POValidator:
@@ -11,5 +11,5 @@ class C3POValidator:
             and message.interaction
             and message.interaction.name == "tb gp low"
             and len(message.embeds) == 1
-            and ENV.is_tracking_c3po_tb(message.channel.id)
+            and is_tracking_c3po_tb(message.channel.id)
         )

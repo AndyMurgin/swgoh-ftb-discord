@@ -6,7 +6,7 @@ from discord.ext.commands import Context
 from account_sender import OwnerAccountSender
 from c3po_validator import C3POValidator
 from configs import PropertiesHolder
-from environment import ENV
+from environment import update_no_tag_mode, update_track_c3po_tb
 from seals_finder import Hunter
 from seals_notifier import Notifier
 
@@ -46,11 +46,9 @@ async def on_message_edit(before, after: Message):
 @client.command()
 async def notag(ctx: Context, value: bool):
     channel_id = ctx.channel.id
-    updated_setting = ENV.update_notag_mode(channel_id, value)
+    updated_setting = update_no_tag_mode(channel_id, value)
     if updated_setting is None:
-        await ctx.send(
-            f"Ошибка при сохранении значения в БД! Обратитесь к создателю."
-        )
+        await setting_update_error(ctx)
     else:
         await ctx.send(
             f"Режим 'Без Тегов' {'активирован' if value else 'выключен'} для текущего канала!"
@@ -60,9 +58,18 @@ async def notag(ctx: Context, value: bool):
 @client.command()
 async def track_c3po_tb(ctx: Context, value: bool):
     channel_id = ctx.channel.id
-    ENV.update_track_c3po_tb(channel_id, value)
+    updated_setting = update_track_c3po_tb(channel_id, value)
+    if updated_setting is None:
+        await setting_update_error(ctx)
+    else:
+        await ctx.send(
+            f"Режим 'Поддержка C3PO В Поиске Тюленей' {'активирован' if value else 'выключен'} для текущего канала!"
+        )
+
+
+async def setting_update_error(ctx: Context):
     await ctx.send(
-        f"Режим 'Поддержка C3PO В Поиске Тюленей' {'активирован' if value else 'выключен'} для текущего канала!"
+        f"Ошибка при сохранении значения в БД! Обратитесь к создателю."
     )
 
 

@@ -1,7 +1,7 @@
 from discord import Member
 from discord.ext.commands import Context
 
-from environment import ENV
+from environment import is_no_tag_mode
 
 
 class Notifier:
@@ -39,4 +39,4 @@ class Notifier:
 
     @staticmethod
     def __is_silent_mode(channel_id: int):
-        return ENV.is_notag_mode(channel_id)
+        return is_no_tag_mode(channel_id)

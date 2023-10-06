@@ -1,12 +1,37 @@
 from mongo import db
 
+SETTINGS_COLLECTION = "bot_settings"
+NO_TAG_SETTING = "no_tag"
+TRACK_C3PO_TB_SETTING = "track_c3po_tb"
+
 
 class SettingsDbService:
 
     @staticmethod
-    def update_notag_setting(channel_id: int, value: bool) -> bool:
-        db["bot_settings"].update_one({"no_tag.channel_id": channel_id}, {"$set": {"no_tag.value": value}},
-                                      upsert=True)
-        after_update = db["bot_settings"].find_one({"no_tag.channel_id": channel_id}, {"_id": 0, "no_tag.value": 1})
-        return after_update.get("no_tag", {}).get("value", None)
+    def update_no_tag_setting(channel_id: int, value: bool) -> bool:
+        return SettingsDbService.update_setting_value(channel_id, NO_TAG_SETTING, value)
 
+
+    @staticmethod
+    def get_not_tag_setting(channel_id: int) -> bool:
+        return SettingsDbService.get_setting_value(channel_id, NO_TAG_SETTING)
+
+    @staticmethod
+    def update_track_c3po_tb_setting(channel_id: int, value: bool) -> bool:
+        return SettingsDbService.update_setting_value(channel_id, TRACK_C3PO_TB_SETTING, value)
+
+    @staticmethod
+    def get_track_c3po_tb_setting(channel_id: int) -> bool:
+        return SettingsDbService.get_setting_value(channel_id, TRACK_C3PO_TB_SETTING)
+
+    @staticmethod
+    def update_setting_value(channel_id: int, setting_name: str, value):
+        db[SETTINGS_COLLECTION].update_one({f"{setting_name}.channel_id": channel_id},
+                                           {"$set": {f"{setting_name}.value": value}}, upsert=True)
+        return SettingsDbService.get_setting_value(channel_id, setting_name)
+
+    @staticmethod
+    def get_setting_value(channel_id: int, setting_name: str):
+        found_document = db[SETTINGS_COLLECTION].find_one({f"{setting_name}.channel_id": channel_id},
+                                                          {"_id": 0, f"{setting_name}.value": 1})
+        return found_document if found_document is None else found_document.get(setting_name, {}).get("value", None)
