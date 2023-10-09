@@ -10,6 +10,10 @@ class PropertiesHolder:
     __DEFAULT_NO_TAG_MODE = "discord.default.no_tag_mode"
     __DEFAULT_TRACK_TB = "discord.default.track_c3po_tb"
 
+    __MONGO_HOST = "mongo.server.host"
+    __MONGO_PORT = "mongo.server.port"
+    __MONGO_DB_NAME = "mondo.db"
+
     @classmethod
     def get_bot_token(cls):
         return cls.get_property(cls.__BOT_TOKEN)
@@ -27,6 +31,21 @@ class PropertiesHolder:
     def get_default_track_c3po_tb(cls) -> bool:
         track_tb_value = cls.get_property(cls.__DEFAULT_TRACK_TB)
         return bool(track_tb_value) if track_tb_value is not None else None
+
+    @classmethod
+    def get_mongo_host(cls) -> str:
+        mongo_host_value = cls.get_property(cls.__MONGO_HOST)
+        return str(mongo_host_value) if mongo_host_value is not None else None
+
+    @classmethod
+    def get_mongo_port(cls) -> int:
+        mongo_port_value = cls.get_property(cls.__MONGO_PORT)
+        return int(mongo_port_value) if mongo_port_value is not None else None
+
+    @classmethod
+    def get_mongo_db_name(cls) -> str:
+        mongo_db_value = cls.get_property(cls.__MONGO_DB_NAME)
+        return str(mongo_db_value) if mongo_db_value is not None else None
 
     @classmethod
     def get_property(cls, key):

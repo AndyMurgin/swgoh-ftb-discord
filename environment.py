@@ -1,5 +1,5 @@
 from configs import PropertiesHolder
-from mongo_settings_service import SettingsDbService
+from mongo.mongo_settings_service import SettingsDbService
 
 
 def update_no_tag_mode(channel_id: int, value: bool) -> bool:

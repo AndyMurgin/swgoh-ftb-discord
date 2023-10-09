@@ -1,4 +1,4 @@
-from mongo import db
+from mongo.mongo_client import db
 
 SETTINGS_COLLECTION = "bot_settings"
 NO_TAG_SETTING = "no_tag"
