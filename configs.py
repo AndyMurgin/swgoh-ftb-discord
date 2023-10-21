@@ -10,6 +10,7 @@ class PropertiesHolder:
     __DEFAULT_NO_TAG_MODE = "discord.default.no_tag_mode"
     __DEFAULT_TRACK_TB = "discord.default.track_c3po_tb"
 
+    __MONGO_INIT = "mongo.init"
     __MONGO_HOST = "mongo.server.host"
     __MONGO_PORT = "mongo.server.port"
     __MONGO_DB_NAME = "mondo.db"
@@ -46,6 +47,11 @@ class PropertiesHolder:
     def get_mongo_db_name(cls) -> str:
         mongo_db_value = cls.get_property(cls.__MONGO_DB_NAME)
         return str(mongo_db_value) if mongo_db_value is not None else None
+
+    @classmethod
+    def get_mongo_init(cls) -> bool:
+        mongo_init_value = cls.get_property(cls.__MONGO_INIT)
+        return bool(mongo_init_value) if mongo_init_value is not None else None
 
     @classmethod
     def get_property(cls, key):
