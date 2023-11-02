@@ -22,6 +22,24 @@ class Notifier:
         )
 
     @staticmethod
+    async def notify_mapped_accounts(ctx: Context, mapped_accounts: dict):
+        if Notifier.__is_silent_mode(ctx.channel.id):
+            await ctx.send(
+                "Режим 'Без Тегов' активирован. Я знаю следующих тюленей, но не буду их тегать:"
+            )
+
+        await ctx.send(
+            "\n".join(
+                [
+                    Notifier.__get_mapped_account_mention(
+                        ctx.channel.id, nickname, mention
+                    )
+                    for (nickname, mention) in mapped_accounts.items()
+                ]
+            )
+        )
+
+    @staticmethod
     async def send_just_nicknames(ctx: Context, nicknames: list[str]):
         await ctx.send(
             "Не смог найти некоторых тюленей в этом канале. Добавьте их вручную (пока не реализовано) "
@@ -38,5 +56,12 @@ class Notifier:
         )
 
     @staticmethod
+    def __get_mapped_account_mention(
+        channel_id: int, account_name: str, mapped_mention: str
+    ):
+        return account_name if Notifier.__is_silent_mode(channel_id) else mapped_mention
+
+    @staticmethod
     def __is_silent_mode(channel_id: int):
+        # TODO need caching
         return is_no_tag_mode(channel_id)

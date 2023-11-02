@@ -42,12 +42,20 @@ async def on_message_edit(before, after: Message):
             grouped_members = Hunter.find_seal_members(seals, ctx)
             await ctx.send("WTF??? Быстро бить ТБ!")
 
-            if len(grouped_members.found_members) > 0:
+            if len(grouped_members.auto_found_members) > 0:
                 logger.info(
                     f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to recognized "
                     f"members."
                 )
-                await Notifier.notify_members(ctx, grouped_members.found_members)
+                await Notifier.notify_members(ctx, grouped_members.auto_found_members)
+
+            if len(grouped_members.mapped_accounts) > 0:
+                logger.info(
+                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
+                )
+                await Notifier.notify_mapped_accounts(
+                    ctx, grouped_members.mapped_accounts
+                )
 
             if len(grouped_members.unrecognized) > 0:
                 logger.info(
