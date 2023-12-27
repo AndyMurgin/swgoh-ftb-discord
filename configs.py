@@ -49,9 +49,8 @@ class PropertiesHolder:
         return str(mongo_db_value) if mongo_db_value is not None else None
 
     @classmethod
-    def get_mongo_init(cls) -> bool:
-        mongo_init_value = cls.get_property(cls.__MONGO_INIT)
-        return bool(mongo_init_value) if mongo_init_value is not None else None
+    def get_mongo_init(cls) -> str:
+        return cls.get_property(cls.__MONGO_INIT)
 
     @classmethod
     def get_property(cls, key):

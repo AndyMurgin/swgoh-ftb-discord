@@ -42,7 +42,7 @@ class Notifier:
     @staticmethod
     async def send_just_nicknames(ctx: Context, nicknames: list[str]):
         await ctx.send(
-            "Не смог найти некоторых тюленей в этом канале. Добавьте их вручную (пока не реализовано) "
+            "Не смог найти некоторых тюленей в этом канале. Добавьте их вручную (map_mention) "
             "или идите за ними в Telegram:"
         )
         await ctx.send("\n".join([nickname for nickname in nicknames]))
