@@ -40,7 +40,7 @@ async def on_message_edit(before, after: Message):
 
         if len(seals) > 0:
             grouped_members = Hunter.find_seal_members(seals, ctx)
-            await ctx.send("WTF??? Быстро бить ТБ!")
+            await ctx.send("WTF??? Идем бить ТБ!")
 
             if len(grouped_members.auto_found_members) > 0:
                 logger.info(
@@ -151,7 +151,7 @@ async def setting_update_error(ctx: Context):
 
 
 def __init_mongo_if_required():
-    if PropertiesHolder.get_mongo_init():
+    if PropertiesHolder.get_mongo_init().lower() == "true":
         mongo_init.execute()
 
 
