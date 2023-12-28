@@ -6,7 +6,12 @@ from discord.ext.commands import Context
 from account_sender import OwnerAccountSender
 from c3po_validator import C3POValidator
 from configs import PropertiesHolder
-from environment import update_no_tag_mode, update_track_c3po_tb, add_map_mention
+from environment import (
+    update_no_tag_mode,
+    update_track_c3po_tb,
+    add_map_mention,
+    update_ignore,
+)
 from log import logger
 from mongo import mongo_init
 from seals_finder import Hunter
@@ -62,7 +67,16 @@ async def on_message_edit(before, after: Message):
                     f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
                     f"members."
                 )
-                await Notifier.send_just_nicknames(ctx, grouped_members.unrecognized)
+                await Notifier.send_not_found_nicknames(
+                    ctx, grouped_members.unrecognized
+                )
+
+            if len(grouped_members.ignored) > 0:
+                logger.info(
+                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
+                    f"members."
+                )
+                await Notifier.send_ignored_nicknames(ctx, grouped_members.ignored)
 
         else:
             await ctx.send("Тюлени не обнаружены. Кажется, я попал не в Tython_LEPV.")
@@ -141,6 +155,28 @@ async def map_mention(ctx: Context, nickname: str, mention: str):
 
     except Exception as e:
         logger.exception("Error during map_mention command processing.")
+
+
+@client.command()
+async def ignore(ctx: Context, nickname: str, enabled: bool):
+    channel_str = f"Channel: {ctx.channel.id} ({ctx.channel.name})."
+    logger.info(
+        f"{channel_str} Received 'ignore' command with parameters: {nickname}, {enabled}"
+    )
+    try:
+        update_ignore(ctx.channel.id, nickname, enabled)
+
+        logger.info(
+            f"{channel_str}. 'ignore' has been processed for nickname {nickname}"
+        )
+        await ctx.send(
+            f"Принято - не буду беспокоить {nickname}"
+            if enabled
+            else f"Принято - буду снова карать {nickname}"
+        )
+
+    except Exception as e:
+        logger.exception("Error during ignore command processing.")
 
 
 async def setting_update_error(ctx: Context):

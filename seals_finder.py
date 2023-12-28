@@ -5,22 +5,41 @@ from mongo.mongo_accounts_service import (
     SWGOH_ACCOUNT_NAME,
     DISCORD_MENTION,
 )
+from mongo.mongo_settings_service import SettingsDbService
 
 
 class SealMembers:
     auto_found_members = {}
     mapped_accounts = {}
     unrecognized = []
+    ignored = []
 
 
 class Hunter:
     @staticmethod
     def find_seal_members(seals: list[str], ctx: Context) -> SealMembers:
+        need_ignore = SettingsDbService.get_ignore_accounts_setting(ctx.channel.id)
+
+        ignored = (
+            []
+            if need_ignore is None
+            else [
+                ignore
+                for ignore in SettingsDbService.get_ignore_accounts_setting(
+                    ctx.channel.id
+                )
+                if ignore in seals
+            ]
+        )
+        filtered_seals = [seal for seal in seals if seal not in ignored]
+
         grouped_members = SealMembers()
+        grouped_members.ignored = ignored
+
         channel_members = ctx.channel.members
         grouped_members.auto_found_members = {
             nickname: member
-            for nickname in seals
+            for nickname in filtered_seals
             for member in channel_members
             if (
                 member.display_name.find(nickname)
@@ -32,7 +51,7 @@ class Hunter:
 
         rest_seals = [
             nickname
-            for nickname in seals
+            for nickname in filtered_seals
             if nickname not in grouped_members.auto_found_members
         ]
 
