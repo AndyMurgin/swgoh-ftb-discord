@@ -33,3 +33,17 @@ def add_map_mention(channel_id: int, game_nickname: str, discord_mention: str):
     AccountDiscordMappingDbService.add_or_update_discord_mention(
         game_nickname, channel_id, discord_mention
     )
+
+
+def update_ignore(channel_id: int, game_nickname: str, enabled: bool):
+    ignored = SettingsDbService.get_ignore_accounts_setting(channel_id)
+    if ignored is None:
+        ignored = [game_nickname]
+
+    already_present = game_nickname in ignored
+    if enabled and not already_present:
+        ignored.append(game_nickname)
+    elif not enabled and already_present:
+        ignored.remove(game_nickname)
+
+    SettingsDbService.update_ignore_accounts(channel_id, ignored)
