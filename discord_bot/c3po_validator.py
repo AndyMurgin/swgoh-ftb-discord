@@ -10,8 +10,7 @@ def is_valid_tb_gp_low(message: Message):
 
 
 def is_not_joined_embed(embed: Embed):
-    # TODO replace with the correct string
-    return embed and embed.description and "not joined" in embed.description
+    return embed and embed.description and "players not joined" in embed.description
 
 
 def is_valid_tw_member(message: Message):
