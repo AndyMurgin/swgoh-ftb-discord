@@ -3,15 +3,16 @@ from discord import Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from account_sender import OwnerAccountSender
-from c3po_validator import C3POValidator
 from configs import PropertiesHolder
+from discord_bot.account_sender import OwnerAccountSender
+from discord_bot.c3po_validator import C3POValidator
 from environment import (
     update_no_tag_mode,
     update_track_c3po_tb,
     add_map_mention,
     update_ignore,
 )
+from interaction_types import InteractionTypes
 from log import logger
 from mongo import mongo_init
 from seals_finder import Hunter
@@ -29,8 +30,10 @@ async def on_ready():
 @client.event
 async def on_message_edit(before, after: Message):
     try:
+        interaction_type = InteractionTypes.get_interaction_type(after.interaction)
+
         if not C3POValidator.is_valid_tb_gp_low(after):
-            logger.debug("Triggered by not a C3PO")
+            logger.debug("Unsupported message edit")
             return
 
         ctx = await client.get_context(after)
@@ -192,4 +195,4 @@ def __init_mongo_if_required():
 
 
 __init_mongo_if_required()
-client.run(PropertiesHolder.get_bot_token())
+client.run(PropertiesHolder.get_discord_bot_token())

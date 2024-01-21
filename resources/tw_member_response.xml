@@ -1,0 +1,17 @@
+<Message id=1196446642057003069 channel=<TextChannel
+id=1144745341514698845 name='тестовая' position=0 nsfw=False news=False category_id=1144745341514698843> type=<MessageType.chat_input_command: 20> author=<Member
+id=752366060312723546 name='C3PO' global_name=None bot=True nick=None guild=<Guild
+id=1144745341514698842 name='Pogrommist SWGOH' shard_id=0 chunked=True member_count=6>> flags=<MessageFlags value=0>>
+
+embeds -> description
+'```
+1TwoZero1
+KiR911
+Psyduck
+TakeshiAL
+Valen0k
+swgoherf
+ЖенаМохноМоха
+Илья
+Я первый
+```'

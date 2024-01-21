@@ -23,13 +23,7 @@ class Hunter:
         ignored = (
             []
             if need_ignore is None
-            else [
-                ignore
-                for ignore in SettingsDbService.get_ignore_accounts_setting(
-                    ctx.channel.id
-                )
-                if ignore in seals
-            ]
+            else [ignore for ignore in need_ignore if ignore in seals]
         )
         filtered_seals = [seal for seal in seals if seal not in ignored]
 
