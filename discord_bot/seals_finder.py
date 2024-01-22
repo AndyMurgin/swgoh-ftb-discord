@@ -15,7 +15,7 @@ class SealMembers:
     ignored = []
 
 
-class Hunter:
+class Finder:
     @staticmethod
     def find_seal_members(seals: list[str], ctx: Context) -> SealMembers:
         need_ignore = SettingsDbService.get_ignore_accounts_setting(ctx.channel.id)

@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from discord_bot.seals_finder import Hunter
+from discord_bot.seals_finder import Finder
 
 
 def prepare_member(display_name: str):
@@ -21,7 +21,7 @@ seals = ["PogrØᶆᶆist", "MINI Servant", "Lorem Ipsum"]
 ctx = prepare_context(1144745341514698845, ["PogrØᶆᶆist (Андрей)"])
 
 # act
-grouped_members = Hunter.find_seal_members(seals, ctx)
+grouped_members = Finder.find_seal_members(seals, ctx)
 
 # verify
 assert grouped_members is not None, "Hunter should find and group seals"

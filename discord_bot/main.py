@@ -6,6 +6,7 @@ from discord.ext.commands import Context
 from configs import PropertiesHolder
 from discord_bot.account_sender import OwnerAccountSender
 from discord_bot.c3po_validator import C3POValidator
+from discord_bot.executors.hunters import HunterFacade
 from environment import (
     update_no_tag_mode,
     update_track_c3po_tb,
@@ -15,16 +16,15 @@ from environment import (
 from interaction_types import InteractionTypes
 from log import logger
 from mongo import mongo_init
-from seals_finder import Hunter
-from seals_notifier import Notifier
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+HUNTER = HunterFacade(client)
 ownerSender = OwnerAccountSender(PropertiesHolder.get_owner_token())
 
 
 @client.event
 async def on_ready():
-    logger.info("The bot has been started! GO FIGHT TB!")
+    logger.info("The bot has been started! READY TO DEMOLISH!")
 
 
 @client.event
@@ -36,55 +36,8 @@ async def on_message_edit(before, after: Message):
             logger.debug("Unsupported message edit")
             return
 
-        ctx = await client.get_context(after)
-        logger.info(
-            f"Channel: {ctx.channel.id} ({ctx.channel.name}). Starting search for TB seals."
-        )
+        await HUNTER.hunt(after, interaction_type)
 
-        seals = [x.name for x in after.embeds[0].fields]
-        logger.info(
-            f"Channel: {ctx.channel.id} ({ctx.channel.name}). Found {len(seals)} seals."
-        )
-
-        if len(seals) > 0:
-            grouped_members = Hunter.find_seal_members(seals, ctx)
-            await ctx.send("WTF??? Идем бить ТБ!")
-
-            if len(grouped_members.auto_found_members) > 0:
-                logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to recognized "
-                    f"members."
-                )
-                await Notifier.notify_members(ctx, grouped_members.auto_found_members)
-
-            if len(grouped_members.mapped_accounts) > 0:
-                logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
-                )
-                await Notifier.notify_mapped_accounts(
-                    ctx, grouped_members.mapped_accounts
-                )
-
-            if len(grouped_members.unrecognized) > 0:
-                logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
-                    f"members."
-                )
-                await Notifier.send_not_found_nicknames(
-                    ctx, grouped_members.unrecognized
-                )
-
-            if len(grouped_members.ignored) > 0:
-                logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
-                    f"members."
-                )
-                await Notifier.send_ignored_nicknames(ctx, grouped_members.ignored)
-
-        else:
-            await ctx.send("Тюлени не обнаружены. Кажется, я попал не в Tython_LEPV.")
-
-        await client.process_commands(after)
     except Exception as e:
         logger.exception(f"Error during message processing. Message: {after.content}")
 
