@@ -32,7 +32,7 @@ async def on_message_edit(before, after: Message):
     try:
         interaction_type = InteractionTypes.get_interaction_type(after.interaction)
 
-        if not C3POValidator.is_valid_tb_gp_low(after):
+        if not C3POValidator.is_message_to_process(after, interaction_type):
             logger.debug("Unsupported message edit")
             return
 
