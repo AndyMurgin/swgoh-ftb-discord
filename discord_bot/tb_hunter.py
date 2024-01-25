@@ -15,12 +15,12 @@ class TbHunter:
     async def hunt(self, message: Message):
         ctx = await self.__client.get_context(message)
         logger.info(
-            f"Channel: {ctx.channel.id} ({ctx.channel.name}). Starting search for TB seals."
+            f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Starting search for TB seals."
         )
 
         seals = [x.name for x in message.embeds[0].fields]
         logger.info(
-            f"Channel: {ctx.channel.id} ({ctx.channel.name}). Found {len(seals)} seals."
+            f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Found {len(seals)} seals."
         )
 
         if len(seals) > 0:
@@ -29,14 +29,14 @@ class TbHunter:
 
             if len(grouped_members.auto_found_members) > 0:
                 logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to recognized "
+                    f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to recognized "
                     f"members."
                 )
                 await Notifier.notify_members(ctx, grouped_members.auto_found_members)
 
             if len(grouped_members.mapped_accounts) > 0:
                 logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
+                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
                 )
                 await Notifier.notify_mapped_accounts(
                     ctx, grouped_members.mapped_accounts
@@ -44,7 +44,7 @@ class TbHunter:
 
             if len(grouped_members.unrecognized) > 0:
                 logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
+                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
                     f"members."
                 )
                 await Notifier.send_not_found_nicknames(
@@ -53,7 +53,7 @@ class TbHunter:
 
             if len(grouped_members.ignored) > 0:
                 logger.info(
-                    f"Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
+                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
                     f"members."
                 )
                 await Notifier.send_ignored_nicknames(ctx, grouped_members.ignored)

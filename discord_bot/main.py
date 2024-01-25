@@ -6,7 +6,7 @@ from discord.ext.commands import Context
 from configs import PropertiesHolder
 from discord_bot.account_sender import OwnerAccountSender
 from discord_bot.c3po_validator import C3POValidator
-from discord_bot.executors.hunters import HunterFacade
+from discord_bot.hunters import HunterFacade
 from environment import (
     update_no_tag_mode,
     update_track_c3po_tb,
