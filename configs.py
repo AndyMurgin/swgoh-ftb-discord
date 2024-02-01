@@ -5,19 +5,26 @@ class PropertiesHolder:
     __properties = Properties()
     __initialized = False
 
-    __BOT_TOKEN = "discord.bot.token"
+    __DISCORD_BOT_TOKEN = "discord.bot.token"
     __OWNER_AUTH_TOKEN = "discord.owner.token"
     __DEFAULT_NO_TAG_MODE = "discord.default.no_tag_mode"
     __DEFAULT_TRACK_TB = "discord.default.track_c3po_tb"
+    __DEFAULT_TRACK_TW = "discord.default.track_c3po_tw"
+
+    __TELEGRAM_BOT_TOKEN = "telegram.bot.token"
 
     __MONGO_INIT = "mongo.init"
     __MONGO_HOST = "mongo.server.host"
     __MONGO_PORT = "mongo.server.port"
-    __MONGO_DB_NAME = "mondo.db"
+    __MONGO_DB_NAME = "mongo.db"
 
     @classmethod
-    def get_bot_token(cls):
-        return cls.get_property(cls.__BOT_TOKEN)
+    def get_discord_bot_token(cls):
+        return cls.get_property(cls.__DISCORD_BOT_TOKEN)
+
+    @classmethod
+    def get_telegram_bot_token(cls):
+        return cls.get_property(cls.__TELEGRAM_BOT_TOKEN)
 
     @classmethod
     def get_owner_token(cls):
@@ -32,6 +39,11 @@ class PropertiesHolder:
     def get_default_track_c3po_tb(cls) -> bool:
         track_tb_value = cls.get_property(cls.__DEFAULT_TRACK_TB)
         return bool(track_tb_value) if track_tb_value is not None else None
+
+    @classmethod
+    def get_default_track_c3po_tw(cls) -> bool:
+        track_tw_value = cls.get_property(cls.__DEFAULT_TRACK_TW)
+        return bool(track_tw_value) if track_tw_value is not None else None
 
     @classmethod
     def get_mongo_host(cls) -> str:

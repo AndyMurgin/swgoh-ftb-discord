@@ -29,6 +29,15 @@ def is_tracking_c3po_tb(channel_id: int) -> bool:
     )
 
 
+def is_tracking_c3po_tw(channel_id: int) -> bool:
+    channel_track_tw = SettingsDbService.get_track_c3po_tw_setting(channel_id)
+    return (
+        channel_track_tw
+        if channel_track_tw is not None
+        else PropertiesHolder.get_default_track_c3po_tw()
+    )
+
+
 def add_map_mention(channel_id: int, game_nickname: str, discord_mention: str):
     AccountDiscordMappingDbService.add_or_update_discord_mention(
         game_nickname, channel_id, discord_mention

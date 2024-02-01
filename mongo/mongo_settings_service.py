@@ -3,6 +3,7 @@ from mongo.mongo_client import db
 SETTINGS_COLLECTION = "bot_settings"
 NO_TAG_SETTING = "no_tag"
 TRACK_C3PO_TB_SETTING = "track_c3po_tb"
+TRACK_C3PO_TW_SETTING = "track_c3po_tw"
 IGNORE_ACCOUNTS_SETTINGS = "ignore_accounts"
 
 
@@ -24,6 +25,16 @@ class SettingsDbService:
     @staticmethod
     def get_track_c3po_tb_setting(channel_id: int) -> bool:
         return SettingsDbService.get_setting_value(channel_id, TRACK_C3PO_TB_SETTING)
+
+    @staticmethod
+    def update_track_c3po_tw_setting(channel_id: int, value: bool) -> bool:
+        return SettingsDbService.update_setting_value(
+            channel_id, TRACK_C3PO_TW_SETTING, value
+        )
+
+    @staticmethod
+    def get_track_c3po_tw_setting(channel_id: int) -> bool:
+        return SettingsDbService.get_setting_value(channel_id, TRACK_C3PO_TW_SETTING)
 
     @staticmethod
     def update_ignore_accounts(channel_id: int, accounts: list[str]) -> list[str]:
