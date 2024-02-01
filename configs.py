@@ -16,7 +16,7 @@ class PropertiesHolder:
     __MONGO_INIT = "mongo.init"
     __MONGO_HOST = "mongo.server.host"
     __MONGO_PORT = "mongo.server.port"
-    __MONGO_DB_NAME = "mondo.db"
+    __MONGO_DB_NAME = "mongo.db"
 
     @classmethod
     def get_discord_bot_token(cls):

@@ -11,11 +11,11 @@ async def _no_hunt(message: Message):
 
 
 class HunterFacade:
-    __hunters = {InteractionTypes.OTHER.name: _no_hunt}
+    _hunters = {InteractionTypes.OTHER.name: _no_hunt}
 
     def __init__(self, client: Bot):
-        self.__hunters[InteractionTypes.TB_GP_LOW.name] = TbHunter(client).hunt
-        self.__hunters[InteractionTypes.TW_JOIN_STATUS.name] = TwHunter(client).hunt
+        self._hunters[InteractionTypes.TB_GP_LOW.name] = TbHunter(client).hunt
+        self._hunters[InteractionTypes.TW_JOIN_STATUS.name] = TwHunter(client).hunt
 
     async def hunt(self, message: Message, type: InteractionTypes):
-        await self.__hunters[type.name](message)
+        await self._hunters[type.name](message)

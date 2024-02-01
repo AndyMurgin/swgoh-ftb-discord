@@ -10,4 +10,9 @@ def get_not_joined_embed(message: Message) -> Embed | None:
 
 
 def is_not_joined_embed(embed: Embed):
-    return embed and embed.description and "players not joined" in embed.description
+    return (
+        embed
+        and embed.description
+        and embed.title
+        and "players not joined" in embed.title
+    )

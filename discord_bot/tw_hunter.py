@@ -34,11 +34,14 @@ class TwHunter:
 
     def __get_not_joined_list(self, message: Message) -> list[str]:
         not_joined_embed = message_utils.get_not_joined_embed(message)
-        # TODO get get text with accounts and parse it to list
+        accs_text = not_joined_embed.description
+        return [acc for acc in accs_text.splitlines() if acc != "```"]
 
     async def __notify_seals(self, ctx: Context, grouped_members: SealMembers):
         await ctx.send("Регистрируемся на ВГ!")
         # TODO picture "are you enlisted?" or "Родина мать зовет"
+        #  https://stackoverflow.com/questions/62360277/sending-gifs-inside-a-embed-in-discord-py
+        #  https://github.com/Giphy/giphy-python-client?tab=readme-ov-file
 
         if len(grouped_members.auto_found_members) > 0:
             logger.info(
