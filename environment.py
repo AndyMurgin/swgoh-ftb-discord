@@ -38,6 +38,21 @@ def is_tracking_c3po_tw(channel_id: int) -> bool:
     )
 
 
+def update_discord_to_tele_broadcast(channel_id: int, value: bool) -> bool:
+    return SettingsDbService.update_discord_to_tele_broadcast_setting(channel_id, value)
+
+
+def is_discord_to_tele_broadcast(channel_id: int) -> bool:
+    discord_to_tele = SettingsDbService.get_discord_to_tele_broadcast_setting(
+        channel_id
+    )
+    return (
+        discord_to_tele
+        if discord_to_tele is not None
+        else PropertiesHolder.get_default_discord_to_tele_broadcast()
+    )
+
+
 def add_map_mention(channel_id: int, game_nickname: str, discord_mention: str):
     AccountDiscordMappingDbService.add_or_update_discord_mention(
         game_nickname, channel_id, discord_mention

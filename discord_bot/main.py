@@ -10,6 +10,7 @@ from discord_bot.hunters import HunterFacade
 from environment import (
     update_no_tag_mode,
     update_track_c3po_tb,
+    update_discord_to_tele_broadcast,
     add_map_mention,
     update_ignore,
 )
@@ -91,6 +92,32 @@ async def track_c3po_tb(ctx: Context, value: bool):
 
     except Exception as e:
         logger.exception("Error during track_c3po_tb command processing.")
+
+
+@client.command()
+async def discord_to_tele(ctx: Context, value: bool):
+    logger.info(
+        f"Channel: {ctx.channel.id} ({ctx.channel.name}). Received 'discord_to_tele' command with value {value}"
+    )
+    try:
+        channel_id = ctx.channel.id
+        updated_setting = update_discord_to_tele_broadcast(channel_id, value)
+
+        if updated_setting is None:
+            await setting_update_error(ctx)
+
+        else:
+            logger.info(
+                f"Channel: {ctx.channel.id} ({ctx.channel.name}). 'discord_to_tele' value has been changed to "
+                f"{updated_setting}"
+            )
+            await ctx.send(
+                f"Режим 'Вещание в Telegram' {'активирован' if updated_setting else 'выключен'} "
+                f"для текущего канала!"
+            )
+
+    except Exception as e:
+        logger.exception("Error during discord_to_tele command processing.")
 
 
 @client.command()

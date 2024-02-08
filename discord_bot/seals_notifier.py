@@ -1,7 +1,7 @@
 from discord import Member
 from discord.ext.commands import Context
 
-from environment import is_no_tag_mode
+from environment import is_no_tag_mode, is_discord_to_tele_broadcast
 
 
 class Notifier:
@@ -41,11 +41,32 @@ class Notifier:
 
     @staticmethod
     async def send_not_found_nicknames(ctx: Context, nicknames: list[str]):
+        nicks_message = "\n".join([nickname for nickname in nicknames])
+
+        if Notifier.__is_discord_to_tele_broadcast(ctx.channel.id):
+            await Notifier._send_not_found_nicknames_telegram(ctx, nicks_message)
+        else:
+            await Notifier._send_not_found_nicknames_no_broadcast(ctx)
+
+    @staticmethod
+    async def _send_not_found_nicknames_telegram(ctx: Context, nicknames_message: str):
+        # TODO task to put a message in a rabbit queue
+        await ctx.send(
+            "Не смог найти некоторых тюленей в этом канале. Если они здесь есть, добавьте их вручную ("
+            "map_mention).\n"
+            "Отправляю сообщение в Telegram:"
+        )
+        await ctx.send(nicknames_message)
+
+    @staticmethod
+    async def _send_not_found_nicknames_no_broadcast(
+        ctx: Context, nicknames_message: str
+    ):
         await ctx.send(
             "Не смог найти некоторых тюленей в этом канале. Добавьте их вручную (map_mention) "
             "или идите за ними в Telegram:"
         )
-        await ctx.send("\n".join([nickname for nickname in nicknames]))
+        await ctx.send(nicknames_message)
 
     @staticmethod
     async def send_ignored_nicknames(ctx: Context, nicknames: list[str]):
@@ -70,3 +91,7 @@ class Notifier:
     def __is_silent_mode(channel_id: int):
         # TODO need caching
         return is_no_tag_mode(channel_id)
+
+    @staticmethod
+    def __is_discord_to_tele_broadcast(channel_id: int):
+        return is_discord_to_tele_broadcast(channel_id)

@@ -10,6 +10,7 @@ class PropertiesHolder:
     __DEFAULT_NO_TAG_MODE = "discord.default.no_tag_mode"
     __DEFAULT_TRACK_TB = "discord.default.track_c3po_tb"
     __DEFAULT_TRACK_TW = "discord.default.track_c3po_tw"
+    __DEFAULT_DISCORD_TO_TELE_BROADCAST = "discord.default.discord_to_tele_broadcast"
 
     __TELEGRAM_BOT_TOKEN = "telegram.bot.token"
 
@@ -44,6 +45,17 @@ class PropertiesHolder:
     def get_default_track_c3po_tw(cls) -> bool:
         track_tw_value = cls.get_property(cls.__DEFAULT_TRACK_TW)
         return bool(track_tw_value) if track_tw_value is not None else None
+
+    @classmethod
+    def get_default_discord_to_tele_broadcast(cls) -> bool:
+        discord_to_tele_broadcast = cls.get_property(
+            cls.__DEFAULT_DISCORD_TO_TELE_BROADCAST
+        )
+        return (
+            bool(discord_to_tele_broadcast)
+            if discord_to_tele_broadcast is not None
+            else None
+        )
 
     @classmethod
     def get_mongo_host(cls) -> str:
