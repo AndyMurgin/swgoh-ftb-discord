@@ -36,7 +36,7 @@ class TbHunter:
 
             if len(grouped_members.mapped_accounts) > 0:
                 logger.info(
-                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
+                    f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to mapped accounts"
                 )
                 await Notifier.notify_mapped_accounts(
                     ctx, grouped_members.mapped_accounts
@@ -44,7 +44,7 @@ class TbHunter:
 
             if len(grouped_members.unrecognized) > 0:
                 logger.info(
-                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
+                    f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to unrecognized "
                     f"members."
                 )
                 await Notifier.send_not_found_nicknames(
@@ -53,7 +53,7 @@ class TbHunter:
 
             if len(grouped_members.ignored) > 0:
                 logger.info(
-                    f"TW Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
+                    f"TB Search: Channel: {ctx.channel.id} ({ctx.channel.name}). Sending notifications to ignored "
                     f"members."
                 )
                 await Notifier.send_ignored_nicknames(ctx, grouped_members.ignored)

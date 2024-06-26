@@ -53,8 +53,7 @@ class Notifier:
         # TODO task to put a message in a rabbit queue
         await ctx.send(
             "Не смог найти некоторых тюленей в этом канале. Если они здесь есть, добавьте их вручную ("
-            "map_mention).\n"
-            "Отправляю сообщение в Telegram:"
+            "map_mention)."
         )
         await ctx.send(nicknames_message)
 
