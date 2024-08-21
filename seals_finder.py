@@ -1,11 +1,11 @@
 from discord.ext.commands import Context
 
+from mongo import SettingsDbService
 from mongo.mongo_accounts_service import (
     AccountDiscordMappingDbService,
     SWGOH_ACCOUNT_NAME,
     DISCORD_MENTION,
 )
-from mongo.mongo_settings_service import SettingsDbService
 
 
 class SealMembers:

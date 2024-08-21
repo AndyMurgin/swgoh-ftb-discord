@@ -2,7 +2,7 @@ from discord import Message
 from discord.ext.commands import Bot, Context
 
 import message_utils
-from discord_bot.log import logger
+from log import logger
 from seals_finder import Finder, SealMembers
 from seals_notifier import Notifier
 

@@ -1,7 +1,7 @@
 from discord import Member
 from discord.ext.commands import Context
 
-from discord_bot.environment import is_no_tag_mode, is_discord_to_tele_broadcast
+from environment import is_no_tag_mode, is_discord_to_tele_broadcast
 
 
 class Notifier:

@@ -1,4 +1,4 @@
-from discord_bot.log import logger
+from log import logger
 from mongo_accounts_service import (
     ACCOUNT_DISCORD_MAPPING_COLLECTION,
     SWGOH_ACCOUNT_NAME,

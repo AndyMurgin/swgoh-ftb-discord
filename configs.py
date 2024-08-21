@@ -1,6 +1,7 @@
 from jproperties import Properties
 
 
+# TODO find more Python-native way for configs
 class PropertiesHolder:
     __properties = Properties()
     __initialized = False

@@ -6,7 +6,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY discord_bot .
 
 RUN apk update && apk add build-base
 
