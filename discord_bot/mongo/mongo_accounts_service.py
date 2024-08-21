@@ -1,4 +1,4 @@
-from mongo.mongo_client import db
+from mongo_client import db
 
 ACCOUNT_DISCORD_MAPPING_COLLECTION = "swgoh_account_discord_mapping"
 SWGOH_ACCOUNT_NAME = "swgoh_acc_name"

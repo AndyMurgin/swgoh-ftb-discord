@@ -1,9 +1,9 @@
 from discord import Message
 from discord.ext.commands import Bot
 
-from discord_bot.seals_finder import Finder
-from discord_bot.seals_notifier import Notifier
-from log import logger
+from discord_bot.log import logger
+from seals_finder import Finder
+from seals_notifier import Notifier
 
 
 class TbHunter:

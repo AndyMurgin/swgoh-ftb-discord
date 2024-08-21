@@ -1,7 +1,7 @@
 from discord import Message
 from discord.ext.commands import Bot
 
-from discord_bot.interaction_types import InteractionTypes
+from interaction_types import InteractionTypes
 from tb_hunter import TbHunter
 from tw_hunter import TwHunter
 

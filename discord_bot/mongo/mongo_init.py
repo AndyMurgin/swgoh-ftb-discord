@@ -1,10 +1,10 @@
-from log import logger
-from mongo.mongo_accounts_service import (
+from discord_bot.log import logger
+from mongo_accounts_service import (
     ACCOUNT_DISCORD_MAPPING_COLLECTION,
     SWGOH_ACCOUNT_NAME,
     DISCORD_CHANNEL_ID,
 )
-from mongo.mongo_client import db
+from mongo_client import db
 
 
 def execute():
