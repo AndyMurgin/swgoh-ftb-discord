@@ -1,8 +1,8 @@
 from discord import Message
 
-import message_utils
-from environment import is_tracking_c3po_tb, is_tracking_c3po_tw
-from interaction_types import InteractionTypes
+from . import message_utils
+from .environment import is_tracking_c3po_tb, is_tracking_c3po_tw
+from .interaction_types import InteractionTypes
 
 
 def is_valid_tb_gp_low(message: Message):

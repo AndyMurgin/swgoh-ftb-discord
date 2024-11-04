@@ -7,19 +7,19 @@ from discord import Message
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from account_sender import OwnerAccountSender
-from c3po_validator import C3POValidator
-from configs import PropertiesHolder
-from environment import (
+from discord_bot.account_sender import OwnerAccountSender
+from discord_bot.c3po_validator import C3POValidator
+from discord_bot.configs import PropertiesHolder
+from discord_bot.environment import (
     update_no_tag_mode,
     update_track_c3po_tb,
     update_discord_to_tele_broadcast,
     add_map_mention,
     update_ignore,
 )
-from hunters import HunterFacade
-from interaction_types import InteractionTypes
-from log import logger
+from discord_bot.hunters import HunterFacade
+from discord_bot.interaction_types import InteractionTypes
+from discord_bot.log import logger
 from mongo import mongo_init
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())

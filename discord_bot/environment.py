@@ -1,6 +1,6 @@
-from configs import PropertiesHolder
 from mongo.mongo_accounts_service import AccountDiscordMappingDbService
 from mongo.mongo_settings_service import SettingsDbService
+from .configs import PropertiesHolder
 
 
 def update_no_tag_mode(channel_id: int, value: bool) -> bool:

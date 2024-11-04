@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 
-from seals_finder import Finder
+from discord_bot.seals_finder import Finder
 
 
 def prepare_member(display_name: str):

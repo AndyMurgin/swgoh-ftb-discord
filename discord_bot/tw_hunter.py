@@ -1,10 +1,10 @@
 from discord import Message
 from discord.ext.commands import Bot, Context
 
-import message_utils
-from log import logger
-from seals_finder import Finder, SealMembers
-from seals_notifier import Notifier
+from . import message_utils
+from .log import logger
+from .seals_finder import Finder, SealMembers
+from .seals_notifier import Notifier
 
 
 class TwHunter:

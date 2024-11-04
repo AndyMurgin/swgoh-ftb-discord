@@ -1,4 +1,4 @@
-from mongo_client import db
+from discord_bot.mongo_client import db
 
 SETTINGS_COLLECTION = "bot_settings"
 NO_TAG_SETTING = "no_tag"

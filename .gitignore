@@ -162,5 +162,5 @@ cython_debug/
 .vscode/
 .idea/
 
-application.properties
+discord_bot/application.properties
 logs/

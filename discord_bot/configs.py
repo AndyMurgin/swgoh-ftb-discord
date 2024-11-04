@@ -86,5 +86,5 @@ class PropertiesHolder:
 
     @classmethod
     def _init(cls):
-        with open("application.properties", "rb") as properties_file:
+        with open("discord_bot/application.properties", "rb") as properties_file:
             cls.__properties.load(properties_file, encoding="utf-8")

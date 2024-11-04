@@ -1,6 +1,6 @@
 import requests
 
-from urls import UrlMaker
+from .urls import UrlMaker
 
 
 class OwnerAccountSender:

@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from configs import PropertiesHolder
+from .configs import PropertiesHolder
 
 _mongo = MongoClient(
     PropertiesHolder.get_mongo_host(), PropertiesHolder.get_mongo_port()
