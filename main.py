@@ -1,7 +1,3 @@
-import sys
-
-print(sys.path)
-
 import discord
 from discord import Message
 from discord.ext import commands
