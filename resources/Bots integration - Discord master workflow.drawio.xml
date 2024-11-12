@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2024-11-10T13:35:14.484Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" etag="fpUfD8tFhVMBN3B03oiT" version="24.4.4" type="google">
+<mxfile host="app.diagrams.net" modified="2024-11-12T19:00:22.071Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" etag="xXI_sfuURN7EI23uO354" version="24.4.4" type="device">
   <diagram name="Страница — 1" id="vXZrCuvpvPBRv32joJv1">
-    <mxGraphModel dx="2665" dy="2173" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2389" dy="2022" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -19,7 +18,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ov936-BNEhTC-ZF5Pf3o-3" value="C3PO Message&lt;div&gt;Listener&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="ov936-BNEhTC-ZF5Pf3o-3" value="Discord Message&lt;div&gt;Listener&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="300" y="90" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ov936-BNEhTC-ZF5Pf3o-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="ov936-BNEhTC-ZF5Pf3o-4" target="ov936-BNEhTC-ZF5Pf3o-17" edge="1">
@@ -126,14 +125,6 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ov936-BNEhTC-ZF5Pf3o-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;dashed=1;" parent="1" source="ov936-BNEhTC-ZF5Pf3o-35" target="ov936-BNEhTC-ZF5Pf3o-16" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="ov936-BNEhTC-ZF5Pf3o-37" value="Subscribes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="ov936-BNEhTC-ZF5Pf3o-36" vertex="1" connectable="0">
-          <mxGeometry x="-0.3534" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="ov936-BNEhTC-ZF5Pf3o-44" value="Master-Discord workflow" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=31;" parent="1" vertex="1">
           <mxGeometry x="80" y="-130" width="420" height="30" as="geometry" />
         </mxCell>
@@ -167,7 +158,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ov936-BNEhTC-ZF5Pf3o-35" value="Discord Notifier" style="rounded=0;whiteSpace=wrap;html=1;" parent="ov936-BNEhTC-ZF5Pf3o-45" vertex="1">
+        <mxCell id="ov936-BNEhTC-ZF5Pf3o-35" value="Telegam Notifier" style="rounded=0;whiteSpace=wrap;html=1;" parent="ov936-BNEhTC-ZF5Pf3o-45" vertex="1">
           <mxGeometry x="630" y="50" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ov936-BNEhTC-ZF5Pf3o-40" value="Telegram&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;Channel&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="ov936-BNEhTC-ZF5Pf3o-45" vertex="1">
@@ -212,6 +203,14 @@
         <mxCell id="ov936-BNEhTC-ZF5Pf3o-56" value="8. Consume Messages" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="ov936-BNEhTC-ZF5Pf3o-55" vertex="1" connectable="0">
           <mxGeometry x="-0.7327" y="-1" relative="1" as="geometry">
             <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ov936-BNEhTC-ZF5Pf3o-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;dashed=1;" parent="1" source="ov936-BNEhTC-ZF5Pf3o-35" target="ov936-BNEhTC-ZF5Pf3o-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ov936-BNEhTC-ZF5Pf3o-37" value="Subscribes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="ov936-BNEhTC-ZF5Pf3o-36" vertex="1" connectable="0">
+          <mxGeometry x="-0.3534" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
