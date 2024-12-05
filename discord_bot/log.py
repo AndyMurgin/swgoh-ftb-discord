@@ -2,7 +2,7 @@ import logging.config
 
 import yaml
 
-with open("discord_bot/log-configs.yaml") as config_file:
+with open("discord_bot/log-configs.yaml.example") as config_file:
     config = yaml.safe_load(config_file.read())
     logging.config.dictConfig(config)
 
