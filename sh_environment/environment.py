@@ -1,4 +1,4 @@
-from ..sh_properties.properties_init import PropertiesHolder
+from sh_properties.properties_init import PropertiesHolder
 
 
 class Environment:
