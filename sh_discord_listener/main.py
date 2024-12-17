@@ -21,10 +21,11 @@ async def on_message_edit(before, after: Message):
     try:
         interaction_type = InteractionTypes.get_interaction_type(after.interaction)
 
-        # TODO continue working on c3po_validator
-        # if not C3POValidator.is_message_to_process(after, interaction_type):
-        #     logger.debug("Unsupported message edit")
-        #     return
+        if not locator.c3po_validator().is_message_to_process(after, interaction_type):
+            logger.debug("Unsupported message edit")
+            return
+
+        # TODO save a processing request in DB for the message
 
     except Exception as e:
         logger.exception(f"Error during message processing. Message: {after.content}")
