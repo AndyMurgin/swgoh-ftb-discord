@@ -12,8 +12,8 @@ class MongoPropertiesHolder(PropertiesHolder):
     def get_mongo_host(self):
         return PropertiesHolder.get_property_value(self, self.__MONGO_HOST)
 
-    def get_mongo_port(self):
-        return PropertiesHolder.get_property_value(self, self.__MONGO_PORT)
+    def get_mongo_port(self) -> int:
+        return int(PropertiesHolder.get_property_value(self, self.__MONGO_PORT))
 
     def get_mongo_db_name(self):
         return PropertiesHolder.get_property_value(self, self.__MONGO_DB_NAME)

@@ -1,6 +1,7 @@
 from c3po_validator import C3POValidator
 from sh_discord_listener import discord_listener_properties
 from sh_discord_listener.discord_listener_environment import DiscordListenerEnvironment
+from sh_discord_listener.mongo.listener_settings import ListenerSettingsService
 from sh_ioc.service_locator import ServiceLocator
 from sh_logging import log_init
 from sh_mongo import database_client
@@ -12,6 +13,7 @@ _PROPERTIES_HOLDER_COMPONENT_NAME = "properties_holder"
 _ENV_COMPONENT_NAME = "env"
 _C3PO_VALIDATOR_COMPONENT_NAME = "c3po_validator"
 _MONGO_DATABASE_COMPONENT_NAME = "mongo_db"
+_SETTINGS_DAO_COMPONENT_NAME = "dao_settings"
 
 
 class DiscordListenerServiceLocator(ServiceLocator):
@@ -38,6 +40,10 @@ class DiscordListenerServiceLocator(ServiceLocator):
         global _MONGO_DATABASE_COMPONENT_NAME
         return self.get_component(_MONGO_DATABASE_COMPONENT_NAME)
 
+    def settings_dao(self):
+        global _SETTINGS_DAO_COMPONENT_NAME
+        return self.get_component(_SETTINGS_DAO_COMPONENT_NAME)
+
 
 def configure(properties_file):
     global locator
@@ -60,10 +66,13 @@ def configure(properties_file):
         ),
     )
 
-    environment = DiscordListenerEnvironment(properties_holder)
+    db = database_client.mongo_init(properties_holder)
+    locator.load(_MONGO_DATABASE_COMPONENT_NAME, db)
+
+    settings_dao = ListenerSettingsService(db)
+    locator.load(_SETTINGS_DAO_COMPONENT_NAME, settings_dao)
+
+    environment = DiscordListenerEnvironment(properties_holder, settings_dao)
     locator.load(_ENV_COMPONENT_NAME, environment)
 
     locator.load(_C3PO_VALIDATOR_COMPONENT_NAME, C3POValidator(environment))
-    locator.load(
-        _MONGO_DATABASE_COMPONENT_NAME, database_client.mongo_init(properties_holder)
-    )

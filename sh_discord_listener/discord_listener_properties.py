@@ -31,7 +31,6 @@ class DiscordListenerPropertiesHolder(
         return DiscordAppPropertiesHolder.get_property_value(self, key)
 
 
-
 def init_properties_for_discord_listener(
     properties_file: str,
 ) -> DiscordListenerPropertiesHolder:
